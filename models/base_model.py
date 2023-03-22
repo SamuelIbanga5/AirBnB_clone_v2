@@ -16,10 +16,12 @@ class BaseModel:
             nullable=False,
             primary_key=True,
             unique=True)
-    created_at = Column(DATETIME,
+    created_at = Column(
+            DATETIME,
             nullable=False,
             default=datetime.utcnow())
-    updated_at = Column(DATETIME,
+    updated_at = Column(
+            DATETIME,
             nullable=False,
             default=datetime.utcnow())
 
