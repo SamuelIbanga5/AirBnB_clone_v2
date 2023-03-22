@@ -62,7 +62,7 @@ class DBStorage:
 
     def new(self, obj):
         """add the object to the current database session."""
-        if obj is not Nne:
+        if obj is not None:
             try:
                 self.__session.add(obj)
                 self.__session.flush()
