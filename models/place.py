@@ -23,8 +23,8 @@ if storage_type == 'db':
 
 class Place(BaseModel, Base):
     """ A place to stay """
+    __tablename__ = 'places'
     if storage_type == 'db':
-        __tablename__ = 'places'
         city_id = Column(
                 String(60),
                 ForeignKey('cities.id'),
@@ -85,3 +85,28 @@ class Place(BaseModel, Base):
                 if rev.place_id == self.id:
                     lst.append(rev)
             return lst
+
+        @property
+        def amenities(self):
+            ''' returns the list of Amenity instances
+                based on the attribute amenity_ids that
+                contains all Amenity.id linked to the Place
+            '''
+            from models import storage
+            all_amens = storage.all(Amenity)
+            lst = []
+            for amen in all_amens.values():
+                if amen.id in self.amenity_ids:
+                    lst.append(amen)
+            return lst
+
+        @amenities.setter
+        def amenities(self, obj):
+            ''' method for adding an Amenity.id to the
+                attribute amenity_ids. accepts only Amenity
+                objects
+            '''
+            if obj is not None:
+                if isinstance(obj, Amenity):
+                    if obj.id not in self.amenity_ids:
+                        self.amenity_ids.append(obj.id)
