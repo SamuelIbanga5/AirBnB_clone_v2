@@ -84,5 +84,5 @@ server {
           alias /data/web_static/current/;
      }
 }
-" > /etc/nginx/sites-available/default
+" | sudo tee /etc/nginx/sites-available/default
 sudo service nginx restart
