@@ -17,7 +17,6 @@
 # Installing Nginx if it is not installed
 sudo apt-get update
 sudo apt-get install -y nginx
-sudo nginx -v
 
 # Creating /data/ directory if it doesn't exist
 if [ ! -d "/data/" ]
@@ -67,9 +66,7 @@ else
 fi
 
 # Giving ownership of the /data/ folder to the ubuntu user and group
-owner=$USER
-group=$(id -g)
-sudo chown -R $owner:$group /data/
+sudo chown -hR ubuntu:ubuntu /data/
 
 # Update the Nginx configuration to server the content of /data/web_static/current/
 sudo echo 
