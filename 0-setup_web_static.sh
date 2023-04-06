@@ -15,9 +15,9 @@
 #+	(example: https://domainname.tech/hbnb_static.)
 
 # Installing Nginx if it is not installed
-#sudo apt-get update
-#sudo apt-get install -y nginx
-#sudo nginx -v
+sudo apt-get update
+sudo apt-get install -y nginx
+sudo nginx -v
 
 # Creating /data/ directory if it doesn't exist
 if [ ! -d "/data/" ]
