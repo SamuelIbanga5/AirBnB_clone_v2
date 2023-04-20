@@ -8,11 +8,12 @@ from fabric.api import *
 
 
 
-env.hosts = ['54.83.131.175', '54.144.21.80']
+env.hosts = ['18.234.80.200', '3.83.18.58']
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/school'
 
 def do_deploy(archive_path):
+
     """Distributes an archive to your web servers."""
     try:
         if path.exists(archive_path):
@@ -33,7 +34,7 @@ def do_deploy(archive_path):
         run('sudo rm -rf /data/web_static/current/')
 
         # Creating new symbolic link
-        run("sudo ls -s /data/web_static/releases/web_static_{} /data/web_static/current".format(time_stamp))
+        run("sudo ln -s /data/web_static/releases/web_static_{} /data/web_static/current".format(time_stamp))
     except:
         return False
 

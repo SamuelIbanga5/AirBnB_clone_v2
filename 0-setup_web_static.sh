@@ -40,7 +40,8 @@ echo "<html>
   <head>
   </head>
   <body>
-    Holberton School
+    <h1>Hello World!</h1>
+    <p>This is a test</p>
   </body>
 </html>" > /data/web_static/releases/test/index.html
 
