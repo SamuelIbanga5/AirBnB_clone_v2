@@ -1,3 +1,4 @@
 # Ignore all pycache files
 
 __pycache__
+private_key.txt
