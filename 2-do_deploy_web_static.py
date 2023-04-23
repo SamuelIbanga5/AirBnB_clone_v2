@@ -4,11 +4,17 @@ that distributes an archive to your web servers, using the function do_deploy.
 """
 
 
+from fabric.operations import run, put, sudo 
 from fabric.api import *
+from os import path
 
 
+<<<<<<< HEAD
 
 env.hosts = ['54.83.131.175', '54.144.21.80']
+=======
+env.hosts = ['54.144.21.80', '54.83.131.175']
+>>>>>>> b4dfdf131027020cb876d2810db186d2dceba580
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/school'
 
