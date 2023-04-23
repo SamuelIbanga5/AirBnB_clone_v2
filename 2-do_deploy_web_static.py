@@ -4,25 +4,21 @@ that distributes an archive to your web servers, using the function do_deploy.
 """
 
 
-from fabric.operations import run, put, sudo 
+from fabric.operations import run, put, sudo
 from fabric.api import *
 from os import path
 
 
-<<<<<<< HEAD
-
-env.hosts = ['54.83.131.175', '54.144.21.80']
-=======
 env.hosts = ['54.144.21.80', '54.83.131.175']
->>>>>>> b4dfdf131027020cb876d2810db186d2dceba580
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/school'
+
 
 def do_deploy(archive_path):
 
     """Distributes an archive to your web servers."""
     try:
-        if path.exists(archive_path):
+        if not path.exists(archive_path):
             return False
 
         # Upload archive to web server
@@ -30,18 +26,25 @@ def do_deploy(archive_path):
 
         # Creating target directory.
         time_stamp = archive_path[-18:-4]
-        run('sudo mkdir -p /data/web_static/releases/web_static_{}/'.format(time_stamp))
+        run(
+                'sudo mkdir -p /data/web_static/releases/\
+                        web_static_{}/'.format(
+                    time_stamp))
 
         # Uncompressing and deleting the archive to the newly created folder.
-        run('sudo tar -xzf /tmp/web_static_{}.tgz -C /data/web_static/releases/web_static_{}/'.format(time_stamp, time_stamp))
+        run(
+                'sudo tar -xzf /tmp/web_static_{}.tgz -C /data/web_static/\
+                        releases/web_static_{}/'.format(
+                            time_stamp, time_stamp))
         run('rm /tmp/web_static_{}.tgz'.format(time_stamp))
 
         # Deleting symbolic link from the web server
         run('sudo rm -rf /data/web_static/current/')
 
         # Creating new symbolic link
-        run("sudo ln -s /data/web_static/releases/web_static_{} /data/web_static/current".format(time_stamp))
-    except:
+        run("sudo ln -s /data/web_static/releases/web_static_{} /\
+                data/web_static/current".format(time_stamp))
+    except Exception:
         return False
 
     return True
