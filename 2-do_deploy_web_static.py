@@ -11,13 +11,13 @@ from os import path
 
 env.hosts = ['54.144.21.80', '54.83.131.175']
 env.user = 'ubuntu'
-env.key_filename = '~/.ssh/school'
+env.key_filename = './private_key.txt'
 
 def do_deploy(archive_path):
 
     """Distributes an archive to your web servers."""
     try:
-        if path.exists(archive_path):
+        if not path.exists(archive_path):
             return False
 
         # Upload archive to web server
