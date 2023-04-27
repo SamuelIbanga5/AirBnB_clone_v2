@@ -27,14 +27,12 @@ def do_deploy(archive_path):
         # Creating target directory.
         time_stamp = archive_path[-18:-4]
         run(
-                'sudo mkdir -p /data/web_static/releases/\
-                        web_static_{}/'.format(
+                'sudo mkdir -p /data/web_static/releases/web_static_{}/'.format(
                     time_stamp))
 
         # Uncompressing and deleting the archive to the newly created folder.
         run(
-                'sudo tar -xzf /tmp/web_static_{}.tgz -C /data/web_static/\
-                        releases/web_static_{}/'.format(
+                'sudo tar -xzf /tmp/web_static_{}.tgz -C /data/web_static/releases/web_static_{}/'.format(
                             time_stamp, time_stamp))
         run('rm /tmp/web_static_{}.tgz'.format(time_stamp))
 
@@ -42,8 +40,7 @@ def do_deploy(archive_path):
         run('sudo rm -rf /data/web_static/current/')
 
         # Creating new symbolic link
-        run("sudo ln -s /data/web_static/releases/web_static_{} /\
-                data/web_static/current".format(time_stamp))
+        run("sudo ln -s /data/web_static/releases/web_static_{} /data/web_static/current".format(time_stamp))
     except Exception:
         return False
 
